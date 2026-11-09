@@ -1,0 +1,12 @@
+@page { margin: 14mm; }
+html, body { background: #EFE3C8 !important; color: #3B2A1E !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page::after, body::before, .skip, .grain, .sprite, .index, .contents, .ribbon, .vrule, dialog, .page-toolbar, .editor-body, .note-state, .back { display: none !important; }
+.app { display: block; height: auto; padding: 0; }
+.leaf { outline-color: #8A6B3A; outline-offset: -10px; }
+.page { display: block; position: relative; background: #F5EDD9; border-radius: 0; padding: 20mm 18mm; min-height: 250mm; transform: none !important; animation: none !important; }
+.corner { color: #8A6B3A; width: 16mm; height: 16mm; }
+.leaf, .print-only, .print-body { color: #3B2A1E !important; }
+.print-only { display: block; max-width: 150mm; margin: 0 auto; font: 400 12pt/20pt 'Crimson Pro', 'Noto Serif Georgian', 'Noto Sans Georgian', 'Droid Sans Georgian', Georgia, serif; }
+.print-only h2 { font: 400 24pt/32pt 'Libre Baskerville', 'Noto Serif Georgian', 'Noto Sans Georgian', 'Droid Sans Georgian', Georgia, serif; color: #2B1D14; text-align: center; margin: 0 0 6pt; }
+.print-meta { color: #5A4632; font: 400 10pt/14pt 'Crimson Pro', 'Noto Serif Georgian', 'Noto Sans Georgian', 'Droid Sans Georgian', Georgia, serif; text-align: center; margin: 0 0 20pt; }
+.print-body { white-space: pre-wrap; orphans: 3; widows: 3; }
