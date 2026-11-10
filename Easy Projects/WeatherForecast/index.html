@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WeatherForecast</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://api.open-meteo.com https://geocoding-api.open-meteo.com https://api.bigdatacloud.net; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Free weather forecast for any city: current conditions and a 7-day outlook. No account, no tracking.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e1c2a">
+<meta property="og:type" content="website"><meta property="og:title" content="WeatherForecast"><meta property="og:description" content="Free weather forecast for any city. No account, no tracking."><meta property="og:image" content="assets/og.jpg">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<script src="js/theme-init.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="i-logo" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="11" r="4"/><path d="M21 3.5v1.5M21 17v1M28.5 11H27M13.5 6.5l1 1M28 4.5l-1 1"/><path d="M9 26a5 5 0 0 1-.6-9.96A6.5 6.5 0 0 1 21 17.5h.5a4 4 0 0 1 0 8z"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></symbol>
+<symbol id="i-partly" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M9 2.5v1M3.5 8h1M5 4l.7.7M13 4l-.7.7"/><path d="M8 20a3.5 3.5 0 0 1-.3-7A5 5 0 0 1 17.3 13H17.5a3.5 3.5 0 0 1 0 7z"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19a4.5 4.5 0 0 1-.4-9A6 6 0 0 1 18 11.5h.5a3.8 3.8 0 0 1 0 7.5z"/></symbol>
+<symbol id="i-fog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14a4.5 4.5 0 0 1-.4-9A6 6 0 0 1 18 6.5h.5a3.8 3.8 0 0 1 0 7.5z"/><path d="M4 18h16M7 21.5h10"/></symbol>
+<symbol id="i-rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4.5 4.5 0 0 1-.4-9A6 6 0 0 1 18 7.5h.5a3.8 3.8 0 0 1 0 7.5z"/><path d="M8 18l-1 3M12.5 18l-1 3M17 18l-1 3"/></symbol>
+<symbol id="i-snow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4.5 4.5 0 0 1-.4-9A6 6 0 0 1 18 7.5h.5a3.8 3.8 0 0 1 0 7.5z"/><path d="M8 18.5v.01M12 20.5v.01M16 18.5v.01M12 17.5v.01"/></symbol>
+<symbol id="i-storm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4.5 4.5 0 0 1-.4-9A6 6 0 0 1 18 7.5h.5a3.8 3.8 0 0 1 0 7.5z"/><path d="M12.5 12l-2.5 4h3l-2 4.5"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s6 6.2 6 10.5a6 6 0 0 1-12 0C6 9.7 12 3.5 12 3.5z"/></symbol>
+<symbol id="i-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h10.5a2.5 2.5 0 1 0-2.5-2.5M3 14h14a2.5 2.5 0 1 1-2.5 2.5M3 19h6"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 18a9 9 0 1 1 15 0"/><path d="M12 14l3.5-5"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+<symbol id="i-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18M7 19a5 5 0 0 1 10 0M12 5v4M9.5 7.5L12 5l2.5 2.5"/></symbol>
+<symbol id="i-sunset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18M7 19a5 5 0 0 1 10 0M12 9V5M9.5 6.5L12 9l2.5-2.5"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.5-5.8M20 4v5h-5"/></symbol><symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></symbol>
+<radialGradient id="cSun" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff4b8"/><stop offset=".5" stop-color="#ffcb4c"/><stop offset="1" stop-color="#f08f22"/></radialGradient>
+<radialGradient id="cGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd25a" stop-opacity=".6"/><stop offset="1" stop-color="#ffd25a" stop-opacity="0"/></radialGradient>
+<linearGradient id="cCl" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="27"><stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#e3eaf5"/><stop offset="1" stop-color="#a9b9d3"/></linearGradient>
+<linearGradient id="cClD" gradientUnits="userSpaceOnUse" x1="0" y1="2" x2="0" y2="27"><stop offset="0" stop-color="#e4ebf6"/><stop offset=".6" stop-color="#b3c2da"/><stop offset="1" stop-color="#7d90b0"/></linearGradient>
+<g id="cldL" fill="url(#cCl)" ><circle cx="9" cy="17" r="8"/><circle cx="17" cy="11" r="10"/><circle cx="28" cy="13" r="9"/><circle cx="33" cy="18" r="7"/><circle cx="20" cy="19" r="9"/><rect x="3" y="17" width="35" height="9" rx="4.5"/></g>
+<g id="cldD" fill="url(#cClD)" ><circle cx="9" cy="17" r="8"/><circle cx="17" cy="11" r="10"/><circle cx="28" cy="13" r="9"/><circle cx="33" cy="18" r="7"/><circle cx="20" cy="19" r="9"/><rect x="3" y="17" width="35" height="9" rx="4.5"/></g><symbol id="c-sun" viewBox="0 0 64 64"><g transform="translate(0.0 0.0) scale(1)"><circle cx="32" cy="32" r="31" fill="url(#cGlow)"/><g stroke="#ffd26a" stroke-width="2.8" stroke-linecap="round"><path d="M52.0 32.0L57.0 32.0"/><path d="M46.1 46.1L49.7 49.7"/><path d="M32.0 52.0L32.0 57.0"/><path d="M17.9 46.1L14.3 49.7"/><path d="M12.0 32.0L7.0 32.0"/><path d="M17.9 17.9L14.3 14.3"/><path d="M32.0 12.0L32.0 7.0"/><path d="M46.1 17.9L49.7 14.3"/></g><circle cx="32" cy="32" r="13.5" fill="url(#cSun)"/></g></symbol><symbol id="c-partly" viewBox="0 0 64 64"><g transform="translate(-2.0 -2.0) scale(0.78)"><circle cx="32" cy="32" r="31" fill="url(#cGlow)"/><g stroke="#ffd26a" stroke-width="2.8" stroke-linecap="round"><path d="M52.0 32.0L57.0 32.0"/><path d="M46.1 46.1L49.7 49.7"/><path d="M32.0 52.0L32.0 57.0"/><path d="M17.9 46.1L14.3 49.7"/><path d="M12.0 32.0L7.0 32.0"/><path d="M17.9 17.9L14.3 14.3"/><path d="M32.0 12.0L32.0 7.0"/><path d="M46.1 17.9L49.7 14.3"/></g><circle cx="32" cy="32" r="13.5" fill="url(#cSun)"/></g><use href="#cldL" transform="translate(13 27) scale(1.12)"/></symbol><symbol id="c-cloud" viewBox="0 0 64 64"><use href="#cldL" transform="translate(7 20) scale(1.22)"/></symbol><symbol id="c-fog" viewBox="0 0 64 64"><use href="#cldL" transform="translate(7 10) scale(1.22)"/><g stroke="#c5d3e6" stroke-width="3" stroke-linecap="round"><path d="M12 47h40M18 53h30M24 59h18"/></g></symbol><symbol id="c-rain" viewBox="0 0 64 64"><use href="#cldD" transform="translate(7 6) scale(1.22)"/><g stroke="#6db3f5" stroke-width="3" stroke-linecap="round"><path d="M20 44l-2 7M30 44l-2 7M40 44l-2 7M50 44l-2 7"/></g></symbol><symbol id="c-snow" viewBox="0 0 64 64"><use href="#cldD" transform="translate(7 6) scale(1.22)"/><g fill="#fff"><circle cx="19" cy="48" r="2.2"/><circle cx="29" cy="52" r="2.2"/><circle cx="39" cy="48" r="2.2"/><circle cx="49" cy="52" r="2.2"/></g></symbol><symbol id="c-storm" viewBox="0 0 64 64"><use href="#cldD" transform="translate(7 4) scale(1.22)"/><path d="M34 38l-8 11h6l-3 9 11-12h-6z" fill="#ffc94a" stroke="#f0a020" stroke-width=".8" stroke-linejoin="round"/></symbol><linearGradient id="cMoon" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f7fd"/><stop offset="1" stop-color="#b9c7e0"/></linearGradient><symbol id="c-moon" viewBox="0 0 64 64"><path d="M40 8a24 24 0 1 0 16 38A19 19 0 0 1 40 8z" fill="url(#cMoon)"/></symbol><symbol id="c-nightpartly" viewBox="0 0 64 64"><g transform="translate(-4 -6) scale(.8)"><path d="M40 8a24 24 0 1 0 16 38A19 19 0 0 1 40 8z" fill="url(#cMoon)"/></g><use href="#cldL" transform="translate(13 27) scale(1.12)"/></symbol></defs>
+</svg>
+
+<div class="bg" aria-hidden="true"></div>
+
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<div class="app">
+  <aside class="side" id="side">
+    <div class="brand"><svg class="ico"><use href="#i-logo"/></svg><span>WeatherForecast</span></div>
+    <nav aria-label="Main">
+      <button class="nav" data-nav="home" aria-current="page"><svg class="ico"><use href="#i-home"/></svg><span data-i18n="home">Home</span></button>
+      <button class="nav" data-nav="search"><svg class="ico"><use href="#i-search"/></svg><span data-i18n="search">Search</span></button>
+      <button class="nav" data-nav="locate"><svg class="ico"><use href="#i-pin"/></svg><span data-i18n="loc">My Location</span></button>
+      <button class="nav" data-nav="settings"><svg class="ico"><use href="#i-gear"/></svg><span data-i18n="set">Settings</span></button>
+    </nav>
+    <div class="side-foot">
+      <button class="theme" id="themeBtn" role="switch" aria-checked="true" aria-label="Dark theme">
+        <svg class="ico"><use href="#i-sun"/></svg><span class="track"><span class="knob"></span></span><svg class="ico"><use href="#i-moon"/></svg>
+      </button>
+
+    </div>
+  </aside>
+
+  <header class="top">
+    <div class="search" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-owns="sugg">
+      <svg class="ico"><use href="#i-search"/></svg>
+      <input id="q" type="search" placeholder="Search for a city…" data-i18n-ph="ph" aria-label="Search for a city" autocomplete="off" maxlength="80" aria-controls="sugg" aria-autocomplete="list">
+      <kbd class="kbd" aria-hidden="true">/</kbd>
+      <ul id="sugg" role="listbox" hidden></ul>
+    </div>
+    <div class="chip" id="chip"><svg class="ico"><use href="#i-pin"/></svg><span id="chipText">No location</span></div>
+    <button class="round" id="refresh" aria-label="Refresh"><svg class="ico"><use href="#i-refresh"/></svg></button>
+    <button class="round" id="lang" aria-label="Language" lang="en">KA</button>
+    <button class="round" id="themeTop" aria-label="Toggle light/dark theme"><svg class="ico"><use href="#i-moon"/></svg></button>
+  </header>
+  <div class="sub"><p class="note" id="note" role="status"></p><ul class="recent" id="recent" aria-label="Recent cities"></ul></div>
+
+  <main class="main" id="main" aria-live="polite">
+    <section class="now card" id="now" aria-label="Current weather">
+      <div class="status" id="status" hidden></div>
+      <div class="now-body" id="nowBody" hidden>
+        <div class="now-l">
+          <h1 class="place"><svg class="ico"><use href="#i-pin"/></svg><span id="place"></span></h1>
+          <p class="time" id="time"></p><p class="time" id="upd"></p>
+          <p class="temp"><span id="temp"></span><sup id="unit">°C</sup></p>
+          <p class="cond" id="cond"></p>
+          <p class="hl"><span><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg><span class="sr" data-i18n="hi">High</span><b id="hi"></b></span><span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg><span class="sr" data-i18n="lo">Low</span><b id="lo"></b></span><span class="feels"><span data-i18n="feels">Feels like</span> <b id="feels"></b></span></p>
+        </div>
+        <svg class="hero-ico" id="heroIco" viewBox="0 0 64 64"><use href="#c-partly"/></svg>
+      </div>
+    </section>
+
+    <section class="stats card" id="stats" aria-label="Weather details"></section>
+
+    <section class="fc card" aria-label="7-day forecast">
+      <h2 data-i18n="fc">7-Day Forecast</h2>
+      <ol id="days"></ol>
+    </section>
+  </main>
+  <footer class="foot">Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (CC BY 4.0) · Place names by <a href="https://www.bigdatacloud.com/" target="_blank" rel="noopener">BigDataCloud</a> · <a href="privacy.html">Privacy</a></footer>
+</div>
+
+<dialog id="settings">
+  <form method="dialog">
+    <h2>Settings</h2>
+    <fieldset><legend>Temperature unit</legend>
+      <label><input type="radio" name="u" value="c" checked> Celsius (°C)</label>
+      <label><input type="radio" name="u" value="f"> Fahrenheit (°F)</label>
+    </fieldset>
+    <h3>Privacy</h3>
+    <p>Weather and city search data come from Open-Meteo. Your location is requested only when you press “My Location” and is not stored. Theme, unit and last city are kept in this browser’s local storage. There is no account, database, or tracking.</p>
+    <button class="btn">Close</button>
+  </form>
+</dialog>
+</body>
+</html>
