@@ -1,0 +1,4 @@
+body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #172033; background: #F7F7F2; }
+.docs-fallback { max-width: 40rem; margin: 4rem auto; padding: 0 1.25rem; line-height: 1.6; }
+.docs-fallback pre { background: #172B4D; color: #F7F7F2; padding: 0.75rem 1rem; border-radius: 6px; overflow-x: auto; }
+.docs-fallback a { color: #172B4D; }

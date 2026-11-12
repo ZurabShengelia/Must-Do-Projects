@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="system" data-mode="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>url-shortener </title>
+  <meta name="description" content="A free, open-source URL shortener. No account needed, no third-party tracking.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="/static/js/theme-init.js"></script>
+  <link rel="preload" href="/static/fonts/Inter-Regular.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+  <link rel="stylesheet" href="/static/css/pages.css">
+  <script type="module" src="/static/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header"></header>
+  <main id="main" tabindex="-1">
+    <noscript><div class="container page"><p>url-shortener needs JavaScript to run. It uses no third-party scripts.</p></div></noscript>
+  </main>
+  <footer class="site-footer">
+    <div class="container inner">
+      <p class="foot-note">A short link redirects to whatever its creator chose. Check where a link leads before you trust it.
+        Only click counts and referrer hostnames are recorded: never IP addresses.</p>
+      <ul>
+        <li><a href="/docs">API docs</a></li>
+        <li><a href="https://opensource.org/licenses/MIT" rel="noopener noreferrer">MIT licensed</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="toasts" id="toasts" role="region" aria-label="Notifications"></div>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-message">
+    <form method="dialog">
+      <h2 id="confirm-title"></h2>
+      <p class="dialog-message" id="confirm-message"></p>
+      <div class="dialog-actions">
+        <button class="btn" value="cancel" id="confirm-cancel">Cancel</button>
+        <button class="btn btn-danger-solid" value="confirm" id="confirm-ok">Delete</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
