@@ -15,14 +15,6 @@ Shortening links needs no account, nothing is sent to third parties, and click a
 - REST API described with OpenAPI 3
 - Rate limiting, request-size limits, CSRF protection, Content-Security-Policy and other security headers
 
-## Screenshots
-
-Captured from the frontend in headless Chromium. The API behind them was a small development stand-in that implements the same contract, so the numbers are sample data.
-
-| | |
-|---|---|
-| ![Landing page with a created link](docs/screenshots/landing-result-light.png) | ![Landing page, dark theme](docs/screenshots/landing-dark.png) |
-| ![Dashboard, dark theme](docs/screenshots/dashboard-dark.png) | ![Link details with chart, dark theme](docs/screenshots/link-details-dark.png) |
 
 ## Technology stack
 
