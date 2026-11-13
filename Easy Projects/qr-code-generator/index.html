@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>QR Code Generator</title>
+  <meta name="description" content="Make QR codes for links, text, email, phone numbers, SMS and Wi-Fi. Everything stays in your browser.">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <svg class="sprite" width="0" height="0" aria-hidden="true">
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clear" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <header class="bar">
+    <a class="brand" href="./">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M2 2h9v9H2zM13 2h9v9h-9zM2 13h9v9H2z" fill="#D9541E"/><path d="M5 5h3v3H5zM16 5h3v3h-3zM5 16h3v3H5z" fill="#111"/><path d="M13 13h4v4h-4zM19 19h3v3h-3zM19 13h3v3h-3z" fill="#F3EEE3"/></svg>
+      <span>qr-code-generator</span>
+    </a>
+    <p>Runs in your browser. Nothing is uploaded.</p>
+  </header>
+
+  <main class="workspace">
+    <section class="content" aria-labelledby="content-title">
+      <h1 id="content-title">Make a QR code</h1>
+      <p class="lede">Pick what the code should do, fill in the details, and the preview updates as you type.</p>
+
+      <form id="qr-form" novalidate autocomplete="off">
+        <fieldset class="types">
+          <legend>What is it for?</legend>
+          <div class="segmented">
+            <label><input type="radio" name="type" value="url" checked><span>Website</span></label>
+            <label><input type="radio" name="type" value="text"><span>Text</span></label>
+            <label><input type="radio" name="type" value="email"><span>Email</span></label>
+            <label><input type="radio" name="type" value="phone"><span>Phone</span></label>
+            <label><input type="radio" name="type" value="sms"><span>SMS</span></label>
+            <label><input type="radio" name="type" value="wifi"><span>Wi-Fi</span></label>
+          </div>
+        </fieldset>
+
+        <div class="panel" data-panel="url">
+          <label class="field"><span>Website address</span>
+            <input name="url" type="text" inputmode="url" placeholder="example.com/menu" spellcheck="false">
+            <small>We add https:// if you leave it out.</small></label>
+        </div>
+
+        <div class="panel" data-panel="text" hidden>
+          <label class="field"><span>Text</span>
+            <textarea name="text" rows="4" placeholder="Anything you want people to read after scanning"></textarea></label>
+        </div>
+
+        <div class="panel" data-panel="email" hidden>
+          <label class="field"><span>Email address</span>
+            <input name="emailAddress" type="text" inputmode="email" placeholder="name@example.com" spellcheck="false"></label>
+          <label class="field"><span>Subject (optional)</span>
+            <input name="emailSubject" type="text" placeholder="Hello"></label>
+          <label class="field"><span>Message (optional)</span>
+            <textarea name="emailBody" rows="3" placeholder="Write a starting message"></textarea></label>
+        </div>
+
+        <div class="panel" data-panel="phone" hidden>
+          <label class="field"><span>Phone number</span>
+            <input name="phone" type="tel" placeholder="+995 555 123 456">
+            <small>Include the country code, starting with +, for the best results.</small></label>
+        </div>
+
+        <div class="panel" data-panel="sms" hidden>
+          <label class="field"><span>Phone number</span>
+            <input name="smsPhone" type="tel" placeholder="+995 555 123 456"></label>
+          <label class="field"><span>Message (optional)</span>
+            <textarea name="smsBody" rows="3" placeholder="Text that is ready to send"></textarea></label>
+        </div>
+
+        <div class="panel" data-panel="wifi" hidden>
+          <label class="field"><span>Network name (SSID)</span>
+            <input name="ssid" type="text" placeholder="Home network" spellcheck="false"></label>
+          <label class="field"><span>Security</span>
+            <select name="security">
+              <option value="WPA">WPA / WPA2 / WPA3</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">None (open network)</option>
+            </select></label>
+          <label class="field"><span>Password</span>
+            <input name="wifiPassword" type="password" autocomplete="off" placeholder="At least 8 characters for WPA">
+            <small>The password is stored in the code as plain text. Anyone who scans it can read it.</small></label>
+          <label class="check"><input name="hidden" type="checkbox"><span>This is a hidden network</span></label>
+        </div>
+
+        <div class="row">
+          <button type="button" class="quiet" id="clear-input"><svg class="icon"><use href="#i-clear"/></svg>Clear input</button>
+        </div>
+
+        <fieldset class="appearance">
+          <legend>Appearance</legend>
+          <div class="colors">
+            <label class="field"><span>Code color</span><input id="foreground" type="color" value="#111111"></label>
+            <label class="field"><span>Background</span><input id="background" type="color" value="#F3EEE3"></label>
+          </div>
+          <label class="field"><span>Size: <output id="size-output">512</output> px</span>
+            <input id="size" type="range" min="128" max="1024" step="32" value="512"></label>
+          <label class="field"><span>Margin: <output id="margin-output">4</output> modules</span>
+            <input id="margin" type="range" min="0" max="10" step="1" value="4">
+            <small>The blank border around the code. Scanners need at least 4.</small></label>
+          <label class="field"><span>Error correction</span>
+            <select id="level">
+              <option value="L">Low (smallest code)</option>
+              <option value="M" selected>Medium (recommended)</option>
+              <option value="Q">Quartile</option>
+              <option value="H">High (survives damage best)</option>
+            </select>
+            <small>Higher levels let a scan succeed even if part of the code is dirty or hidden.</small></label>
+          <div class="row">
+            <button type="button" class="quiet" id="reset-settings"><svg class="icon"><use href="#i-reset"/></svg>Reset appearance</button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
+    <section class="stage" aria-labelledby="preview-title">
+      <h2 id="preview-title">Preview</h2>
+      <div class="plate" id="plate">
+        <div id="preview" role="img" aria-label="QR code preview" hidden></div>
+        <p id="empty" class="empty">Your QR code will appear here. Start by filling in the details on the left.</p>
+        <p id="error" class="problem" hidden></p>
+      </div>
+      <p class="meta" id="meta" hidden></p>
+      <div class="actions">
+        <button type="button" class="primary" id="download-png" disabled><svg class="icon"><use href="#i-download"/></svg>Download PNG</button>
+        <button type="button" class="secondary" id="download-svg" disabled><svg class="icon"><use href="#i-download"/></svg>Download SVG</button>
+        <button type="button" class="secondary" id="copy-content" disabled><svg class="icon"><use href="#i-copy"/></svg>Copy content</button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>MIT licensed. QR encoding by qrcode-generator (MIT). No cookies, no tracking, no network requests.</p>
+  </footer>
+</body>
+</html>
