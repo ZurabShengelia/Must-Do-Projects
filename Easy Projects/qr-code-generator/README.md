@@ -13,10 +13,6 @@ Project #4 in the Must Do Projects portfolio.
 - PNG and SVG downloads with meaningful file names, plus copy of the encoded content.
 - Keyboard accessible, visible focus states, reduced-motion support, responsive layout.
 
-## Screenshots
-
-Screenshots have not been captured yet. Add them to a `docs/` folder and link them here.
-
 ## Technology stack
 
 - HTML5, CSS3, and vanilla JavaScript (ES modules). No framework, no build step.
